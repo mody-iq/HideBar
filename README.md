@@ -4,13 +4,12 @@
 
 ## المميزات
 - إخفاء فوري ومباشر لشريط الهوم بالكامل بدون أي إعدادات إضافية.
-- تغطية شاملة عبر ربط الفئات المسؤولة عن الشريط في النظام والتطبيقات:
-  - `SBFHomeGrabberSettings`
-  - `SBHomeGrabberView`
-  - `CSHomeAffordanceView`
-  - `SBDashBoardHomeAffordanceView`
+- تصميم آمن ومستقر يعمل داخل `SpringBoard` فقط (`com.apple.springboard`) لتفادي أي تعارض مع التطبيقات أو الدخول في Safe Mode.
+- التحقق من وجود الفئات وتوقيع الدوال قبل ربطها بـ `MSHookMessageEx` لتوافق كامل مع **ElleKit** و**Roothide** و**arm64e**:
   - `MTLumaDodgePillView`
   - `MTStaticColorPillView`
+  - `CSAlwaysOnHomeAffordancePillView`
+  - `SBFHomeAffordanceView`
 - يدعم معماريات `arm64` و `arm64e` (بما فيها أجهزة iPhone XS Max وما بعده).
 - يدعم حزم **Roothide** (مثل Dopamine-roothide / relaxin / Serotonin) و **Rootless** و **Rootful**.
 - بناء تلقائي عبر **GitHub Actions** لإنتاج ملفات `.deb` جاهزة للتثبيت.
