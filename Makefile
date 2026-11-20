@@ -6,8 +6,8 @@ include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = HideBar
 
-HideBar_FILES = Tweak.x
-HideBar_CFLAGS = -fobjc-arc
-HideBar_FRAMEWORKS = UIKit
+HideBar_FILES = Tweak.m
+HideBar_CFLAGS = -fobjc-arc -Wall -Wextra
+HideBar_FRAMEWORKS = Foundation UIKit
 
 include $(THEOS)/makefiles/tweak.mk

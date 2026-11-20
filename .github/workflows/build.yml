@@ -53,6 +53,14 @@ jobs:
           make package FINALPACKAGE=1
           cp packages/*.deb dist/rootful/
 
+      - name: Verify Built Packages
+        run: |
+          for f in dist/*/*.deb; do
+            echo "=== $f ==="
+            dpkg-deb -I "$f"
+            dpkg-deb -c "$f"
+          done
+
       - name: Upload .deb packages
         uses: actions/upload-artifact@v4
         with:
