@@ -16,14 +16,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install Roothide Theos & iOS Toolchain
+      - name: Install Dependencies & Roothide Theos
         env:
-          CI: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential fakeroot rsync curl perl zip git xz-utils libtinfo6 libxml2-dev
+          sudo update-alternatives --set fakeroot /usr/bin/fakeroot-sysv || true
+
           export THEOS="$HOME/theos"
           echo "THEOS=$THEOS" >> "$GITHUB_ENV"
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/roothide/theos/master/bin/install-theos)"
+
+          git clone --recursive https://github.com/roothide/theos.git "$THEOS"
+          mkdir -p "$THEOS/toolchain"
+          curl -fsSL https://github.com/L1ghtmann/llvm-project/releases/latest/download/iOSToolchain-x86_64.tar.xz | tar -xJ -C "$THEOS/toolchain/"
+          "$THEOS/bin/install-sdk" latest
 
       - name: Build Roothide (.deb)
         run: |
